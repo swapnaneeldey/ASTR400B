@@ -1,0 +1,40 @@
+\documentclass[12pt]{article} 
+\usepackage{mathptmx}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{graphicx}
+\usepackage[a4paper, left=0.6in, right=0.6in, top=0.7in, bottom=0.7in]{geometry} 
+
+\title{ASTR400B Galaxy mass table}
+\author{Swapnaneel Dey}
+\date{February 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Table}
+
+\begin{table}[ht!]
+\centering
+    \resizebox{1.0\textwidth}{!}{%
+    \begin{tabular}{c|c|c|c|c|c}
+    \hline
+       Galaxy Name & Halo Mass ($10^{12}\,M_{\odot}$) & Disk Mass ($10^{12}\,M_{\odot}$) & Bulge Mass ($10^{12}\,M_{\odot}$) & Total ($10^{12}\,M_{\odot}$) & $f_\text{bar}$ \\
+    \hline
+        MW & 1.975 & 0.075 & 0.010 & 2.060 & 0.041 \\ 
+        \hline
+        M31 & 1.921 & 0.012 & 0.019 & 2.060 & 0.067 \\
+        \hline
+        M33 & 0.187 & 0.009 & 0 & 0.196 & 0.046 \\
+        \hline
+        Local Group &  & & & 4.316 & 0.054 \\
+    \hline
+    \end{tabular}}
+    \caption{Caption}
+    \label{tab:my_label}
+\end{table}
+
+
+
+\end{document}
