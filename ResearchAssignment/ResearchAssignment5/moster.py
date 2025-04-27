@@ -111,7 +111,6 @@ class AbundanceMatching:
         B = (self.mhalo/M1_low)**(0.608+0.059)   # High mass end
         
         Norm = 2*(0.0351+0.0058) # Normalization
-        print(Norm*(A+B)**(-1))
         sm_upperlimit = self.mhalo*Norm*(A+B)**(-1)
 
         M1 = 10**(11.59-0.236) # Converting characteristic mass 
@@ -122,7 +121,6 @@ class AbundanceMatching:
         B = (self.mhalo/M1_up)**(0.608-0.059)   # High mass end
         
         Norm = 2*(0.0351-0.0058) # Normalization
-        print(Norm*(A+B)**(-1))
         sm_lower_lim = self.mhalo*Norm*(A+B)**(-1)
 
         return sm_upperlimit, sm_lower_lim
