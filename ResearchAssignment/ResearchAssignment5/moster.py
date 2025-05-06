@@ -106,32 +106,32 @@ class AbundanceMatching:
         M1_up = 10**(11.59+0.236) # Converting characteristic mass 
         # to Msun from Log(Msun)
         M1_low = 10**(11.59-0.236) # Converting characteristic mass
-        A = (self.mhalo/M1_up)**(-(1.376+0.153))  # Low mass end
-        
-        B = (self.mhalo/M1_low)**(0.608+0.059)   # High mass end
-        
-        Norm = 2*(0.0351+0.0058) # Normalization
-        sm_upperlimit = self.mhalo*Norm*(A+B)**(-1)
 
-        M1 = 10**(11.59-0.236) # Converting characteristic mass 
-        # to Msun from Log(Msun)
+        A_low = (self.mhalo/M1_up)**(-(1.376+0.153))  # Low mass end
         
-        A = (self.mhalo/M1_low)**(-(1.376-0.153))  # Low mass end
+        B_low = (self.mhalo/M1_up)**(0.608-0.059)   # High mass end
         
-        B = (self.mhalo/M1_up)**(0.608-0.059)   # High mass end
+        Norm_up = 2*(0.0351+0.0058) # Normalization
+        sm_upperlimit = self.mhalo*Norm_up*(A_low+B_low)**(-1)
+
+
         
-        Norm = 2*(0.0351-0.0058) # Normalization
-        sm_lower_lim = self.mhalo*Norm*(A+B)**(-1)
+        A_up = (self.mhalo/M1_low)**(-(1.376-0.153))  # Low mass end
+        
+        B_up = (self.mhalo/M1_low)**(0.608+0.059)   # High mass end
+        
+        Norm_low = 2*(0.0351-0.0058) # Normalization
+        sm_lower_lim = self.mhalo*Norm_low*(A_up+B_up)**(-1)
 
         return sm_upperlimit, sm_lower_lim
 
     def compute_sigma_m(self, unc_N = 0.0058, unc_M1 = 0.236, unc_beta = 0.153, unc_gamma = 0.059):
-        M = self.mhalo                          # Halo mass
-        logM1 = self.logM1()                    # Log base 10 of characteristic mass
-        M1 = 10**logM1                          # Characteristic mass
-        N = self.N()                            # Normalization factor
-        beta = self.Beta()                      # Slope at low mass end
-        gamma = self.Gamma()                    # Slope at high mass end
+        M = self.mhalo                          
+        logM1 = self.logM1()                   
+        M1 = 10**logM1                          
+        N = self.N()                           
+        beta = self.Beta()                    
+        gamma = self.Gamma()                    
 
         x = M / M1
         denom = (x**(-beta) + x**gamma)
@@ -145,10 +145,9 @@ class AbundanceMatching:
 
         dm_dgamma = -2 * M * N * (x**gamma * np.log(x)) / denom**2
 
-        # Total variance from each parameter's uncertainty
         sigma_m_squared = (
             (dm_dN * unc_N)**2 +
-            (dm_dlogM1 * unc_M1)**2 +  # Uncertainty in M1 is already in log10 units
+            (dm_dlogM1 * unc_M1)**2 +  
             (dm_dbeta * unc_beta)**2 +
             (dm_dgamma * unc_gamma)**2
         )
