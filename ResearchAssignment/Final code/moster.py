@@ -125,32 +125,4 @@ class AbundanceMatching:
 
         return sm_upperlimit, sm_lower_lim
 
-    def compute_sigma_m(self, unc_N = 0.0058, unc_M1 = 0.236, unc_beta = 0.153, unc_gamma = 0.059):
-        M = self.mhalo                          
-        logM1 = self.logM1()                   
-        M1 = 10**logM1                          
-        N = self.N()                           
-        beta = self.Beta()                    
-        gamma = self.Gamma()                    
-
-        x = M / M1
-        denom = (x**(-beta) + x**gamma)
-        
-        # Partial derivatives
-        dm_dN = (2 * M) / denom
-
-        dm_dlogM1 = 2 * M * N * np.log(10) * (gamma * x**gamma - beta * x**(-beta)) / denom**2
-
-        dm_dbeta = 2 * M * N * (x**(-beta) * np.log(x)) / denom**2
-
-        dm_dgamma = -2 * M * N * (x**gamma * np.log(x)) / denom**2
-
-        sigma_m_squared = (
-            (dm_dN * unc_N)**2 +
-            (dm_dlogM1 * unc_M1)**2 +  
-            (dm_dbeta * unc_beta)**2 +
-            (dm_dgamma * unc_gamma)**2
-        )
-
-        sigma_m = np.sqrt(sigma_m_squared)
-        return sigma_m
+    
